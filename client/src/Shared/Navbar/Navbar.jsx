@@ -53,6 +53,9 @@ const Navbar = () => {
               <span className="font-bold text-2xl md:text-lg">
                 Chashma Express BD
               </span>
+              <span className="text-center text-red-200 font-medium">
+                চশমার সহজ সমাধান
+              </span>
             </div>
           </Link>
 
