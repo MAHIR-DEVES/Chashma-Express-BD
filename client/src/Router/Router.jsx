@@ -4,7 +4,7 @@ import Home from '../Pages/Home/Home';
 import ProductsDetails from '../Pages/ProductDetails/ProductsDetails';
 import Statistics from '../Components/Admin/Statistics/Statistics';
 import AdminRoot from '../Layout/Admin/AdminRoot';
-import AllProducts from '../Pages/Adnin/AllProducts/Allproducts';
+import AllProducts from '../Pages/Adnin/AllProducts/AllProducts';
 import AddProduct from '../Pages/Adnin/AddProduct/AddProduct';
 import Order from '../Pages/Adnin/Order/Order';
 import Search from '../Pages/Search/Search';
