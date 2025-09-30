@@ -109,7 +109,7 @@ const ProductDetails = () => {
   return (
     <div className="sm:max-w-7xl mx-auto py-8">
       {/* Breadcrumb */}
-      <div className="text-sm text-gray-500 mb-6">
+      <div className="text-sm text-gray-500 mb-6 ml-2 md:ml-0 ">
         Home / {category} / {brand} / {name.substring(0, 20)}...
       </div>
 
@@ -277,7 +277,7 @@ const ProductDetails = () => {
 
       {/* Related Products */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 ml-3 md:ml-0">
           Related Products
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

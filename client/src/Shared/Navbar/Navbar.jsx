@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa';
 
 import ICON from '../../assets/logoIcon.png';
+import NavMarquee from './NavMarquee';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +27,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg sticky top-0 z-50 py-2">
       <div className="w-full px-2 sm:max-w-7xl mx-auto">
+        <NavMarquee></NavMarquee>
         {/* Main navbar content */}
         <div className="flex justify-between items-center py-5 md:py-3">
           {/* Mobile menu button */}
