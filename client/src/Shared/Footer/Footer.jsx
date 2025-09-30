@@ -1,16 +1,14 @@
 import React from 'react';
 import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaPhone,
+  FaCreditCard,
   FaEnvelope,
+  FaFacebook,
+  FaHeadset,
   FaMapMarkerAlt,
+  FaPhone,
   FaShieldAlt,
   FaShippingFast,
-  FaHeadset,
-  FaCreditCard,
+  FaWhatsapp,
 } from 'react-icons/fa';
 
 const Footer = () => {
@@ -47,7 +45,7 @@ const Footer = () => {
       {/* Main Footer Content */}
       <div className="pt-12 pb-8">
         <div className="sm:max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             {/* Company Info */}
             <div className="flex flex-col">
               <div className="flex items-center space-x-2 text-white mb-4">
@@ -68,58 +66,24 @@ const Footer = () => {
                 service.
               </p>
               <div className="flex space-x-4">
+                {/* Facebook */}
                 <a
-                  href="#"
-                  className="bg-white bg-opacity-20 p-3 rounded-full hover:bg-white hover:bg-opacity-30 transition duration-200"
+                  target="_blank"
+                  href="https://www.facebook.com/share/19Zvd7i5pV/"
+                  className="bg-[#1877F2] p-3 rounded-full hover:opacity-80 transition duration-200"
                 >
-                  <FaFacebook className="w-5 h-5" />
+                  <FaFacebook className="w-5 h-5 text-white" />
                 </a>
+
+                {/* WhatsApp */}
                 <a
-                  href="#"
-                  className="bg-white bg-opacity-20 p-3 rounded-full hover:bg-white hover:bg-opacity-30 transition duration-200"
+                  target="_blank"
+                  href="https://wa.me/+8801302596174"
+                  className="bg-[#25D366] p-3 rounded-full hover:opacity-80 transition duration-200"
                 >
-                  <FaTwitter className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="bg-white bg-opacity-20 p-3 rounded-full hover:bg-white hover:bg-opacity-30 transition duration-200"
-                >
-                  <FaInstagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="bg-white bg-opacity-20 p-3 rounded-full hover:bg-white hover:bg-opacity-30 transition duration-200"
-                >
-                  <FaLinkedin className="w-5 h-5" />
+                  <FaWhatsapp className="w-5 h-5 text-white" />
                 </a>
               </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-red-600">
-                Quick Links
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'All Products',
-                  'Special Offers',
-                  'About Us',
-                  'Contact Us',
-                  'FAQ',
-                  'Size Guide',
-                ].map(item => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-red-200 hover:text-white transition duration-200 flex items-center group"
-                    >
-                      <span className="w-2 h-2 bg-red-300 rounded-full mr-3 group-hover:bg-white transition duration-200"></span>
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             {/* Categories */}
@@ -158,36 +122,18 @@ const Footer = () => {
                 <div className="flex items-start">
                   <FaMapMarkerAlt className="w-5 h-5 text-white mt-1 mr-3 flex-shrink-0" />
                   <span className="text-red-200">
-                    123 Vision Street, Optical District, BD 1212
+                    Naogaon Sadar, Naogaon, Rajshahi
                   </span>
                 </div>
                 <div className="flex items-center">
                   <FaPhone className="w-5 h-5 text-white mr-3 flex-shrink-0" />
-                  <span className="text-red-200">+880 1234-567890</span>
+                  <span className="text-red-200">+88 01302596174</span>
                 </div>
                 <div className="flex items-center">
                   <FaEnvelope className="w-5 h-5 text-white mr-3 flex-shrink-0" />
                   <span className="text-red-200">
-                    support@chashmaexpress.com
+                    minalhossain902@gmail.com
                   </span>
-                </div>
-              </div>
-
-              {/* Newsletter */}
-              <div className="bg-red-800 bg-opacity-30 p-4 rounded-lg">
-                <h4 className="font-semibold mb-2">Newsletter</h4>
-                <p className="text-red-200 text-sm mb-3">
-                  Subscribe for exclusive offers and updates
-                </p>
-                <div className="flex">
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="px-3 py-2 bg-white text-red-900 rounded-l-md focus:outline-none focus:ring-2 focus:ring-white w-full text-sm"
-                  />
-                  <button className="bg-white text-red-700 px-4 py-2 rounded-r-md hover:bg-red-50 transition duration-200 font-medium text-sm whitespace-nowrap">
-                    Subscribe
-                  </button>
                 </div>
               </div>
             </div>
@@ -198,18 +144,16 @@ const Footer = () => {
             <div className="flex flex-col items-center">
               <span className="text-red-200 text-sm mb-3">We Accept</span>
               <div className="flex space-x-4">
-                {['Visa', 'MasterCard', 'PayPal', 'bKash', 'Nagad'].map(
-                  method => (
-                    <div
-                      key={method}
-                      className="bg-white bg-opacity-20 px-3 py-1 rounded-md"
-                    >
-                      <span className="text-white text-sm font-medium">
-                        {method}
-                      </span>
-                    </div>
-                  )
-                )}
+                {['bKash', 'Nagad'].map(method => (
+                  <div
+                    key={method}
+                    className="bg-opacity-20 px-3 py-1 rounded-md"
+                  >
+                    <span className="text-white text-sm font-medium">
+                      {method}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

@@ -131,8 +131,7 @@ const ProductCards = ({ product }) => {
               className="flex-1  text-white py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg"
             >
               <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
-                <FaShoppingCart className="mr-2" />
-                Add to Cart
+                Order Now
               </button>
             </Link>
           </div>

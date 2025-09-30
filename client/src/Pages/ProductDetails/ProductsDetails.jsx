@@ -94,13 +94,10 @@ const ProductDetails = () => {
     description = 'No description available',
     brand = 'Unknown Brand',
     sku = 'N/A',
-    warranty = 'No warranty information',
     specifications = [],
     images = ['https://via.placeholder.com/500x500?text=No+Image'],
     rating = 0,
     reviews = 0,
-    model = 'Unknown Model',
-    pid = 'N/A',
   } = product;
 
   // Discount %
@@ -149,8 +146,8 @@ const ProductDetails = () => {
         </div>
 
         {/* Product Info */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">{name}</h1>
+        <div className="px-4 md:px-0">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4 ">{name}</h1>
 
           {/* Rating */}
           <div className="flex items-center mb-4">
@@ -177,20 +174,12 @@ const ProductDetails = () => {
                   >
                     {stock > 0 ? 'In Stock' : 'Out of Stock'}
                   </td>
-                  <td className="py-1 text-gray-600 font-medium">PID:</td>
-                  <td className="py-1">{pid}</td>
                 </tr>
                 <tr>
                   <td className="py-1 text-gray-600 font-medium">SKU:</td>
                   <td className="py-1">{sku}</td>
                   <td className="py-1 text-gray-600 font-medium">Brand:</td>
                   <td className="py-1">{brand}</td>
-                </tr>
-                <tr>
-                  <td className="py-1 text-gray-600 font-medium">Model:</td>
-                  <td className="py-1">{model}</td>
-                  <td className="py-1 text-gray-600 font-medium">Warranty:</td>
-                  <td className="py-1">{warranty}</td>
                 </tr>
               </tbody>
             </table>
@@ -257,7 +246,7 @@ const ProductDetails = () => {
               disabled={stock <= 0}
             >
               <FaShoppingCart className="mr-2" />
-              {stock > 0 ? 'Buy Now' : 'Out of Stock'}
+              {stock > 0 ? 'অর্ডার করুন' : 'Out of Stock'}
             </button>
             <button
               onClick={() => navigate(-1)}

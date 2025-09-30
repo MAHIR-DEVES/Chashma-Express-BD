@@ -5,9 +5,10 @@ import {
   FaCheckCircle,
   FaShoppingBag,
   FaUser,
-  FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
+  FaShieldAlt,
+  FaShippingFast,
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -20,6 +21,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
   if (!isOpen) return null;
 
@@ -38,7 +40,6 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
         price: product.discountPrice || product.price,
         quantity,
         userName: userInfo.name,
-        userEmail: userInfo.email,
         userPhone: userInfo.phone,
         userAddress: userInfo.address,
         status: 'pending',
@@ -49,219 +50,325 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
         'https://tech-bazar-iota.vercel.app/orders',
         orderData
       );
-      toast.success('Order Done ✅');
+      toast.success('Order Placed Successfully! 🎉');
       onClose();
+      // Reset form
+      setUserInfo({ name: '', email: '', phone: '', address: '' });
+      setCurrentStep(1);
     } catch (err) {
       console.error(err);
-      alert('Failed to place order');
+      toast.error('Failed to place order. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const totalPrice = (product?.discountPrice || product?.price || 0) * quantity;
+  // Calculate prices
+  const productPrice = product?.discountPrice || product?.price || 0;
+  const productTotal = productPrice * quantity;
+  const deliveryCharge = 120; // 120 TK delivery charge
+  const totalPrice = productTotal + deliveryCharge;
+  const discountAmount = product?.price
+    ? (product.price - productPrice) * quantity
+    : 0;
+
+  const canProceed = userInfo.name && userInfo.phone && userInfo.address;
 
   return (
-    <div className="fixed inset-0 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 scale-100 opacity-100">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-amber-500 to-amber-600 p-5 text-white relative">
-          <h2 className="text-2xl font-bold flex items-center">
-            <FaCheckCircle className="mr-2" /> Confirm Your Order
-          </h2>
-          <p className="text-amber-100 mt-1">
-            Complete your purchase with confidence
-          </p>
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-white hover:text-amber-200 transition-colors"
-          >
-            <FaTimes size={20} />
-          </button>
+    <div className="fixed inset-0  bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 scale-100">
+        {/* Header with Gradient */}
+        <div className="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                <FaShoppingBag className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold">Complete Your Order</h2>
+                <p className="text-red-100 mt-1">Fast & Secure Checkout</p>
+              </div>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-white hover:text-red-200 transition-colors p-2 rounded-full hover:bg-white hover:bg-opacity-10"
+            >
+              <FaTimes size={24} />
+            </button>
+          </div>
+
+          {/* Progress Steps */}
+          <div className="flex items-center justify-center mt-6">
+            <div
+              className={`flex items-center ${
+                currentStep >= 1 ? 'text-white' : 'text-red-300'
+              }`}
+            >
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${
+                  currentStep >= 1
+                    ? 'bg-white text-red-600 border-white'
+                    : 'border-red-300'
+                }`}
+              >
+                {currentStep > 1 ? <FaCheckCircle size={14} /> : '1'}
+              </div>
+              <span className="ml-2 text-sm font-medium">Details</span>
+            </div>
+            <div
+              className={`w-12 h-1 mx-2 ${
+                currentStep >= 2 ? 'bg-white' : 'bg-red-400'
+              }`}
+            ></div>
+            <div
+              className={`flex items-center ${
+                currentStep >= 2 ? 'text-white' : 'text-red-300'
+              }`}
+            >
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 ${
+                  currentStep >= 2
+                    ? 'bg-white text-red-600 border-white'
+                    : 'border-red-300'
+                }`}
+              >
+                {currentStep > 2 ? <FaCheckCircle size={14} /> : '2'}
+              </div>
+              <span className="ml-2 text-sm font-medium">Confirm</span>
+            </div>
+          </div>
         </div>
 
-        <div className="p-5 max-h-[70vh] overflow-y-auto">
-          {/* Product Summary */}
-          <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <h3 className="font-semibold text-gray-700 mb-3 flex items-center">
-              <FaShoppingBag className="mr-2 text-amber-500" /> Order Summary
+        <div className="p-6 max-h-[70vh] overflow-y-auto">
+          {/* Product Summary Card */}
+          <div className="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-xl border border-red-100 mb-6">
+            <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
+              <FaShoppingBag className="mr-3 text-red-500" />
+              Order Summary
             </h3>
 
-            <div className="flex items-center mb-3">
+            <div className="flex items-start space-x-4 mb-4">
               <img
-                src={product?.images?.[0] || 'https://via.placeholder.com/60'}
+                src={product?.images?.[0] || 'https://via.placeholder.com/80'}
                 alt={product?.name}
-                className="w-16 h-16 object-contain rounded-md border border-gray-200 mr-3"
+                className="w-20 h-20 object-contain rounded-lg border-2 border-white shadow-sm"
               />
               <div className="flex-1">
-                <h4 className="font-medium text-gray-800 line-clamp-2">
+                <h4 className="font-semibold text-gray-800 text-lg leading-tight">
                   {product?.name}
                 </h4>
-                <p className="text-sm text-gray-600">Quantity: {quantity}</p>
+                <p className="text-gray-600 text-sm mt-1">
+                  Quantity: {quantity}
+                </p>
+
+                {/* Pricing Breakdown */}
+                <div className="mt-3 space-y-2">
+                  {product?.discountPrice && (
+                    <div className="flex items-center space-x-2">
+                      <span className="text-gray-500 line-through text-sm">
+                        ৳{(product.price * quantity).toLocaleString()}
+                      </span>
+                      <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold">
+                        Save ৳{discountAmount.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="space-y-1">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Product Price:</span>
+                      <span className="font-medium">
+                        ৳{productTotal.toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600 flex items-center">
+                        <FaShippingFast className="w-3 h-3 mr-1 text-blue-500" />
+                        Delivery Charge:
+                      </span>
+                      <span className="font-medium">
+                        ৳{deliveryCharge.toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="border-t border-gray-200 pt-2 mt-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-gray-800">
+                          Total Amount:
+                        </span>
+                        <span className="text-2xl font-bold text-red-600">
+                          ৳{totalPrice.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="flex justify-between items-center pt-3 border-t border-gray-200">
-              <span className="font-medium text-gray-700">Total:</span>
-              <span className="text-xl font-bold text-amber-600">
-                ₹{totalPrice.toLocaleString()}
-              </span>
+            {product?.discountPrice && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-3 mt-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-green-700 text-sm font-medium">
+                    You're saving ৳{discountAmount.toLocaleString()}!
+                  </span>
+                  <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                    {Math.round(
+                      (1 - product.discountPrice / product.price) * 100
+                    )}
+                    % OFF
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Important Notice */}
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-yellow-600 text-sm font-bold">!</span>
+              </div>
+              <div className="text-yellow-800 text-sm">
+                <p className="font-semibold mb-1"> Important Notice</p>
+                <p className="mb-2">
+                  অর্ডার করার আগে নিশ্চিত হোন যে প্রোডাক্টটি নেবেন। অযথা অর্ডার
+                  করলে আমরা ও ডেলিভারি ম্যান হয়রানির শিকার হবো
+                </p>
+                <p className="font-medium">
+                  💵 Payment Method: Cash on Delivery
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* User Info Form */}
-          <div className="mb-6">
-            <h3 className="font-semibold text-gray-700 mb-4 flex items-center">
-              <FaUser className="mr-2 text-amber-500" /> Your Information
-            </h3>
-
-            <div className="space-y-4">
+          {/* User Information Form */}
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Name Field */}
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaUser className="text-gray-400" />
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  আপনার নাম *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaUser className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="আপনার সম্পূর্ণ নাম লিখুন"
+                    value={userInfo.name}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-white"
+                    required
+                  />
                 </div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name"
-                  value={userInfo.name}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  required
-                />
               </div>
 
+              {/* Phone Field */}
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="text-gray-400" />
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  মোবাইল নাম্বার *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaPhone className="text-gray-400" />
+                  </div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="+880 1234-567890"
+                    value={userInfo.phone}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-white"
+                    required
+                  />
                 </div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={userInfo.email}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  required
-                />
               </div>
+            </div>
 
+            {/* Address Field */}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                ঠিকানা *
+              </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaPhone className="text-gray-400" />
-                </div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={userInfo.phone}
-                  onChange={handleChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                  required
-                />
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 pt-3 pointer-events-none">
+                <div className="absolute top-3 left-3 pointer-events-none">
                   <FaMapMarkerAlt className="text-gray-400" />
                 </div>
                 <textarea
                   name="address"
-                  placeholder="Delivery Address"
+                  placeholder="আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন "
                   value={userInfo.address}
                   onChange={handleChange}
                   rows="3"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all resize-none"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-white resize-none"
                   required
                 />
               </div>
             </div>
           </div>
 
-          {/* Security Note */}
-          <div className="bg-blue-50 p-3 rounded-lg border border-blue-100 mb-6">
-            <p className="text-sm text-blue-700 flex items-start">
-              <svg
-                className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Your information is secure and will only be used for order
-              processing.
-            </p>
+          {/* Trust Badges */}
+          <div className="grid grid-cols-3 gap-3 mt-6">
+            <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+              <FaShieldAlt className="w-6 h-6 text-green-500 mb-2" />
+              <span className="text-xs font-medium text-gray-700">
+                সুরক্ষিত
+              </span>
+              <span className="text-xs text-gray-500">পেমেন্ট</span>
+            </div>
+            <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+              <FaShippingFast className="w-6 h-6 text-blue-500 mb-2" />
+              <span className="text-xs font-medium text-gray-700">দ্রুত</span>
+              <span className="text-xs text-gray-500">ডেলিভারি</span>
+            </div>
+            <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg">
+              <FaCheckCircle className="w-6 h-6 text-red-500 mb-2" />
+              <span className="text-xs font-medium text-gray-700">
+                কোয়ালিটি
+              </span>
+              <span className="text-xs text-gray-500">গ্যারান্টিড</span>
+            </div>
           </div>
         </div>
 
-        {/* Footer with action buttons */}
-        <div className="bg-gray-50 px-5 py-4 border-t border-gray-200 flex flex-col sm:flex-row-reverse sm:justify-between">
-          <div className="flex space-x-3">
-            <button
-              onClick={onClose}
-              className="px-5 py-2.5 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"
-              disabled={isSubmitting}
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleConfirm}
-              disabled={
-                isSubmitting ||
-                !userInfo.name ||
-                !userInfo.email ||
-                !userInfo.phone ||
-                !userInfo.address
-              }
-              className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-400 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 flex items-center justify-center min-w-[120px]"
-            >
-              {isSubmitting ? (
-                <>
-                  <svg
-                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  Processing...
-                </>
-              ) : (
-                'Confirm Order'
-              )}
-            </button>
-          </div>
+        {/* Footer Actions */}
+        <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row-reverse sm:justify-between sm:items-center space-y-3 sm:space-y-0">
+            <div className="flex space-x-3">
+              <button
+                onClick={onClose}
+                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 flex-1 sm:flex-none"
+                disabled={isSubmitting}
+              >
+                বাতিল করুন
+              </button>
+              <button
+                onClick={handleConfirm}
+                disabled={!canProceed || isSubmitting}
+                className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-lg hover:shadow-xl disabled:shadow-none flex items-center justify-center min-w-[140px] flex-1 sm:flex-none"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                    প্রসেসিং...
+                  </>
+                ) : (
+                  <>
+                    <FaCheckCircle className="mr-2" />
+                    অর্ডার কনফার্ম করুন
+                  </>
+                )}
+              </button>
+            </div>
 
-          <div className="mt-3 sm:mt-0 flex items-center text-sm text-gray-500">
-            <svg
-              className="w-4 h-4 mr-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Secure checkout
+            <div className="flex items-center justify-center sm:justify-start text-sm text-gray-500">
+              <FaShieldAlt className="w-4 h-4 mr-2 text-green-500" />
+              <span>SSL Secured • 256-bit Encryption</span>
+            </div>
           </div>
         </div>
       </div>

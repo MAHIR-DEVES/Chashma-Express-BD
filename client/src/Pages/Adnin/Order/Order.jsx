@@ -137,10 +137,8 @@ const Order = () => {
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
-              <option value="processing">Processing</option>
-              <option value="shipped">Shipped</option>
+
               <option value="delivered">Delivered</option>
-              <option value="cancelled">Cancelled</option>
             </select>
           </div>
         </div>
@@ -159,13 +157,16 @@ const Order = () => {
                   Customer
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Address
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Amount
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Items
+                  Phone
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status

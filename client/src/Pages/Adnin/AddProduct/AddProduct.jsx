@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { FaUpload, FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import { FaBangladeshiTakaSign } from 'react-icons/fa6';
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -20,27 +21,19 @@ const AddProduct = () => {
   const [imagePreviews, setImagePreviews] = useState([]);
 
   const categories = [
-    'Electronics',
-    'Computers & Laptops',
-    'Smartphones',
-    'Gaming',
-    'Audio & Video',
-    'Cameras',
-    'Wearables',
-    'Accessories',
+    'Sunglasses',
+    'Power Glasses',
+    'Frame Collection',
+    'Double Poly Sunglasses',
+    'Polarized Sunglasses',
   ];
 
   const brands = [
-    'Apple',
-    'Samsung',
-    'Dell',
-    'HP',
-    'Lenovo',
-    'Sony',
-    'LG',
-    'Microsoft',
-    'Asus',
-    'Acer',
+    'Ray-Ban Sunglass',
+    'Ray-Ban X Polarized Sunglasses',
+    'Frame',
+    'Tom Fot ',
+    'New Collection',
   ];
 
   const handleInputChange = e => {
@@ -249,7 +242,10 @@ const AddProduct = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Price (₹) *
+                    <span className="flex items-center gap-1">
+                      Price
+                      <FaBangladeshiTakaSign className="font-bold text-xs" />
+                    </span>
                   </label>
                   <input
                     type="number"
@@ -263,43 +259,16 @@ const AddProduct = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Discount Price (₹)
+                    <span className="flex items-center gap-1">
+                      Discount Price
+                      <FaBangladeshiTakaSign className="font-bold text-xs" />
+                    </span>
                   </label>
                   <input
                     type="number"
                     name="discountPrice"
                     value={productData.discountPrice}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Stock Quantity *
-                  </label>
-                  <input
-                    type="number"
-                    name="stock"
-                    value={productData.stock}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Warranty
-                  </label>
-                  <input
-                    type="text"
-                    name="warranty"
-                    value={productData.warranty}
-                    onChange={handleInputChange}
-                    placeholder="e.g., 2 years"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>

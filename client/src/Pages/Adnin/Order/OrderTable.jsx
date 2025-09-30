@@ -13,6 +13,8 @@ import {
 import { toast } from 'react-toastify';
 
 const OrderTable = ({ order, setOrders }) => {
+  console.log(order);
+
   const [newStatus, setNewStatus] = useState(order.status);
 
   const getStatusBadge = status => {
@@ -94,17 +96,23 @@ const OrderTable = ({ order, setOrders }) => {
           <div className="text-sm font-medium text-gray-900">
             {order.userName}
           </div>
-          <div className="text-sm text-gray-500">{order.userEmail}</div>
+        </div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div>
+          <div className="text-sm font-medium text-gray-900">
+            {order.userAddress}
+          </div>
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
         {new Date(order.createdAt).toLocaleDateString()}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-        ₹{Number(order.price).toLocaleString()}
+        ৳{(Number(order.price) + 120).toLocaleString()}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-        {order.quantity}
+        {order.userPhone}
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         {getStatusBadge(order.status)}
@@ -117,10 +125,7 @@ const OrderTable = ({ order, setOrders }) => {
         >
           <option value="all">Select Status</option>
           <option value="pending">Pending</option>
-          <option value="processing">Processing</option>
-          <option value="shipped">Shipped</option>
           <option value="delivered">Delivered</option>
-          <option value="cancelled">Cancelled</option>
         </select>
 
         <button

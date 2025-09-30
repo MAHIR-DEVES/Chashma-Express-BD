@@ -8,6 +8,8 @@ import {
   FaBars,
 } from 'react-icons/fa';
 
+import ICON from '../../assets/logoIcon.png';
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,20 +27,20 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg sticky top-0 z-50 py-2">
       <div className="w-full px-2 sm:max-w-7xl mx-auto">
         {/* Main navbar content */}
-        <div className="flex justify-between items-center py-3">
+        <div className="flex justify-between items-center py-5 md:py-3">
           {/* Logo and brand name */}
-          <Link to="/" className="flex items-center space-x-2 text-white">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center relative shadow-lg">
-              {/* Inner circle for depth */}
-              <div className="w-8 h-8 bg-red-400 rounded-full flex items-center justify-center">
-                <span className="text-[#831010] font-bold text-sm">CE</span>
-              </div>
-              {/* Shine effect */}
-              <div className="absolute top-1 left-1 w-2 h-2 bg-white bg-opacity-40 rounded-full"></div>
+          <Link to="/" className="flex items-center space-x-3 text-white">
+            {/* Logo with Emoji */}
+            <div className="-mr-4 -mt-10">
+              <img className="w-14 h-8 " src={ICON} alt="" />
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-bold sm:text-xl">Chashma Express BD</span>
-              <span className="text-xs text-red-200">BEATS PREMIUM</span>
+
+            {/* Brand Name */}
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold md:text-lg">Chashma Express BD</span>
+              <span className="text-xs text-red-200 font-medium">
+                BEATS PREMIUM
+              </span>
             </div>
           </Link>
 
@@ -74,7 +76,7 @@ const Navbar = () => {
 
             {/* User account icon */}
             <Link
-              to="/account"
+              to="#"
               className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200"
               aria-label="User account"
             >
@@ -83,7 +85,7 @@ const Navbar = () => {
 
             {/* Shopping cart icon */}
             <Link
-              to="/cart"
+              to="#"
               className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 relative"
               aria-label="Shopping cart"
             >
@@ -91,14 +93,6 @@ const Navbar = () => {
               <span className="absolute -top-1 -right-1 bg-white text-red-700 text-xs w-5 h-5 flex items-center justify-center rounded-full font-bold">
                 3
               </span>
-            </Link>
-
-            {/* Offers button */}
-            <Link
-              to="/offers"
-              className="bg-white hover:bg-red-50 text-red-700 px-4 py-2 rounded-md font-medium transition duration-200 hidden md:block"
-            >
-              Offers
             </Link>
 
             {/* Mobile menu button */}
@@ -135,21 +129,6 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-
-        {/* Mobile Offers Button */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-red-700">
-            <div className="pt-2 pb-3">
-              <Link
-                to="/offers"
-                className="block w-full text-center bg-white text-red-700 px-4 py-2 rounded-md font-medium transition duration-200 hover:bg-red-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                View Offers
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
