@@ -165,16 +165,16 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className=" pt-4">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-6 pl-2 md:pl-0">
         <h1 className="text-2xl font-bold text-gray-800">Add New Product</h1>
         <p className="text-gray-600">Add a new product to your inventory</p>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-lg shadow-md p-6"
+        className="bg-white rounded-lg shadow-md p-4"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column - Basic Information */}

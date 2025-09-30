@@ -161,7 +161,7 @@ const AllProducts = () => {
     setSelectedProduct(null);
   };
   return (
-    <div className="p-6">
+    <div className="p-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div>
