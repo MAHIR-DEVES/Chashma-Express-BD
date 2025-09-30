@@ -11,10 +11,13 @@ const AdminLogin = () => {
   const handleLogin = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://localhost:5000/admin-login', {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        'https://tech-bazar-iota.vercel.app/admin-login',
+        {
+          email,
+          password,
+        }
+      );
 
       if (res.data.success) {
         // localStorage এ save করুন
