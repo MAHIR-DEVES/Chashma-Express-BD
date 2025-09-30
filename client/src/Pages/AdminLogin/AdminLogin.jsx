@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -19,10 +20,11 @@ const AdminLogin = () => {
         // localStorage এ save করুন
         localStorage.setItem('isAdmin', true);
         localStorage.setItem('adminInfo', JSON.stringify(res.data.user));
-        navigate('/admin'); // redirect to dashboard
+        toast.success('Login successful');
+        navigate('/admin');
       }
     } catch (err) {
-      alert('❌ ' + err.response.data.message);
+      toast.error('❌ ' + err.response.data.message);
     }
   };
 
