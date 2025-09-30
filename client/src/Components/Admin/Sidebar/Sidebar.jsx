@@ -279,7 +279,7 @@ const Sidebar = () => {
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden backdrop-blur-sm"
+          className="fixed inset-0  bg-opacity-50 z-30 lg:hidden backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
         />
       )}
