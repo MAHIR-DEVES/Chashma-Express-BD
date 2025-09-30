@@ -8,6 +8,8 @@ import AllProducts from '../Pages/Adnin/AllProducts/AllProducts';
 import AddProduct from '../Pages/Adnin/AddProduct/AddProduct';
 import Order from '../Pages/Adnin/Order/Order';
 import Search from '../Pages/Search/Search';
+import AdminLogin from '../Pages/AdminLogin/AdminLogin';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
@@ -27,11 +29,20 @@ export const router = createBrowserRouter([
         path: 'search',
         Component: Search,
       },
+      {
+        // শুধু /search → query string থেকে value আসবে
+        path: '/admin-login',
+        Component: AdminLogin,
+      },
     ],
   },
   {
     path: '/admin',
-    Component: AdminRoot,
+    element: (
+      <PrivateRoute>
+        <AdminRoot></AdminRoot>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,

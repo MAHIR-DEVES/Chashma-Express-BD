@@ -60,6 +60,11 @@ const Sidebar = () => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
+  const handelLogout = () => {
+    localStorage.removeItem('isAdmin');
+    window.location.href = '/admin-login';
+  };
+
   return (
     <>
       {/* Mobile Menu Button */}
@@ -260,7 +265,10 @@ const Sidebar = () => {
               <FaHome className="w-4 h-4" />
               <span>Home</span>
             </Link>
-            <button className="flex-1 flex items-center justify-center space-x-2 p-3 text-red-200 hover:bg-red-500 hover:text-white rounded-lg transition-colors duration-200 text-sm font-medium">
+            <button
+              onClick={handelLogout}
+              className="flex-1 flex items-center justify-center space-x-2 p-3 text-red-200 hover:bg-red-500 hover:text-white rounded-lg transition-colors duration-200 text-sm font-medium"
+            >
               <FaSignOutAlt className="w-4 h-4" />
               <span>Logout</span>
             </button>
