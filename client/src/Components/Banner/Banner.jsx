@@ -104,14 +104,14 @@ const Banner = () => {
                   <div className="w-1/2 sm:w-1/2 lg:w-1/2 flex justify-center items-center">
                     <div className="relative">
                       {/* Glow Effect - Visible on all screens */}
-                      <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 bg-white bg-opacity-10 rounded-full absolute -inset-3 sm:-inset-4 blur-xl"></div>
+                      <div className=" mt-10 ml-5 md:mt-12 md:ml-12 w-32 h-32 lg:w-56 lg:h-56 bg-white bg-opacity-10 rounded-full absolute -inset-3 sm:-inset-4 blur-3xl md:blur-2xl"></div>
 
                       {/* Main Image */}
                       <div className="relative z-10">
                         <img
                           src={slide.image}
                           alt={slide.title}
-                          className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 xl:w-60 xl:h-60 object-contain transform hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
+                          className="w-48 h-48 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-64 lg:h-64 xl:w-80 xl:h-80 object-contain transform hover:scale-105 transition-transform duration-500 drop-shadow-2xl"
                           style={{
                             filter:
                               'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3))',
