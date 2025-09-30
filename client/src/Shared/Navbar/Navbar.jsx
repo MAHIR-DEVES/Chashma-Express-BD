@@ -50,9 +50,8 @@ const Navbar = () => {
 
             {/* Brand Name */}
             <div className="flex flex-col leading-tight">
-              <span className="font-bold md:text-lg">Chashma Express BD</span>
-              <span className="text-xs text-red-200 font-medium">
-                BEATS PREMIUM
+              <span className="font-bold text-2xl md:text-lg">
+                Chashma Express BD
               </span>
             </div>
           </Link>
