@@ -28,10 +28,23 @@ const Navbar = () => {
       <div className="w-full px-2 sm:max-w-7xl mx-auto">
         {/* Main navbar content */}
         <div className="flex justify-between items-center py-5 md:py-3">
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white p-2 rounded-md hover:bg-red-700 transition duration-200 md:hidden"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <FaTimes className="w-6 h-6" />
+            ) : (
+              <FaBars className="w-6 h-6" />
+            )}
+          </button>
+
           {/* Logo and brand name */}
           <Link to="/" className="flex items-center space-x-3 text-white">
             {/* Logo with Emoji */}
-            <div className="-mr-4 -mt-10">
+            <div className="-mr-4 -mt-10  hidden md:block">
               <img className="w-14 h-8 " src={ICON} alt="" />
             </div>
 
@@ -77,7 +90,7 @@ const Navbar = () => {
             {/* User account icon */}
             <Link
               to="#"
-              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200"
+              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200  hidden md:block"
               aria-label="User account"
             >
               <FaRegUser className="w-5 h-5" />
@@ -86,7 +99,7 @@ const Navbar = () => {
             {/* Shopping cart icon */}
             <Link
               to="#"
-              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 relative"
+              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 relative  hidden md:block"
               aria-label="Shopping cart"
             >
               <FaShoppingCart className="w-5 h-5" />
@@ -94,19 +107,6 @@ const Navbar = () => {
                 3
               </span>
             </Link>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white p-2 rounded-md hover:bg-red-700 transition duration-200 md:hidden"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <FaTimes className="w-6 h-6" />
-              ) : (
-                <FaBars className="w-6 h-6" />
-              )}
-            </button>
           </div>
         </div>
 
