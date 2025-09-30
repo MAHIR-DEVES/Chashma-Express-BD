@@ -67,7 +67,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu Button open */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-4 left-4 z-50 p-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
@@ -79,19 +79,19 @@ const Sidebar = () => {
         )}
       </button>
 
-      {/* Sidebar */}
+      {/* Sidebar  */}
       <div
         className={`
-          fixed lg:static inset-y-0 left-0 z-40
+          fixed  lg:static inset-y-0 left-0 z-40
           bg-gradient-to-b from-[#831010] to-[#B91C1C]
           text-white w-72 transform transition-all duration-300 ease-in-out
           shadow-2xl lg:shadow-none
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0
-          flex flex-col
+          flex flex-col 
         `}
       >
         {/* Logo Section */}
-        <div className="p-6 border-b border-red-600">
+        <div className="p-6 border-b border-red-600 mt-12 md:mt-0">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-gradient-to-br from-white to-red-100 rounded-xl flex items-center justify-center relative shadow-lg">
               <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
