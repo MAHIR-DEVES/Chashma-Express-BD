@@ -150,6 +150,22 @@ async function run() {
       }
     });
 
+    // Admin login
+    app.post('/admin-login', (req, res) => {
+      const { email, password } = req.body;
+
+      if (
+        email === process.env.ADMIN_EMAIL &&
+        password === process.env.ADMIN_PASSWORD
+      ) {
+        res.json({ success: true, message: 'Admin login successful' });
+      } else {
+        res
+          .status(401)
+          .json({ success: false, message: 'Invalid credentials' });
+      }
+    });
+
     // Ping MongoDB to confirm connection
     // await client.db('admin').command({ ping: 1 });
     console.log('🏓 Pinged MongoDB successfully!');
