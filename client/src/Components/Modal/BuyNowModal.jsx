@@ -207,7 +207,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
               </div>
             </div>
 
-            {product?.discountPrice && (
+            {/* {product?.discountPrice && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 mt-3">
                 <div className="flex items-center justify-between">
                   <span className="text-green-700 text-sm font-medium">
@@ -221,26 +221,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
                   </span>
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* Important Notice */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-            <div className="flex items-start space-x-3">
-              <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-yellow-600 text-sm font-bold">!</span>
-              </div>
-              <div className="text-yellow-800 text-sm">
-                <p className="font-semibold mb-1"> Important Notice</p>
-                <p className="mb-2">
-                  অর্ডার করার আগে নিশ্চিত হোন যে প্রোডাক্টটি নেবেন। অযথা অর্ডার
-                  করলে আমরা ও ডেলিভারি ম্যান হয়রানির শিকার হবো
-                </p>
-                <p className="font-medium">
-                  💵 Payment Method: Cash on Delivery
-                </p>
-              </div>
-            </div>
+            )} */}
           </div>
 
           {/* User Information Form */}
@@ -300,13 +281,32 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
                 </div>
                 <textarea
                   name="address"
-                  placeholder="আপনার সম্পূর্ণ ডেলিভারি ঠিকানা লিখুন "
+                  placeholder="আপনার সম্পূর্ণ  ঠিকানা লিখুন "
                   value={userInfo.address}
                   onChange={handleChange}
                   rows="3"
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all bg-white resize-none"
                   required
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Important Notice */}
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-yellow-600 text-sm font-bold">!</span>
+              </div>
+              <div className="text-yellow-800 text-sm">
+                <p className="font-semibold mb-1"> Important Notice</p>
+                <p className="mb-2">
+                  অর্ডার করার আগে নিশ্চিত হোন যে প্রোডাক্টটি নেবেন। অযথা অর্ডার
+                  করলে আমরা ও ডেলিভারি ম্যান হয়রানির শিকার হবো
+                </p>
+                <p className="font-medium">
+                  💵 Payment Method: Cash on Delivery
+                </p>
               </div>
             </div>
           </div>
@@ -341,7 +341,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
             <div className="flex space-x-3">
               <button
                 onClick={onClose}
-                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 flex-1 sm:flex-none"
+                className="px-2 py-2 md:px-6 md:py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 flex-1 sm:flex-none"
                 disabled={isSubmitting}
               >
                 বাতিল করুন
@@ -349,7 +349,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
               <button
                 onClick={handleConfirm}
                 disabled={!canProceed || isSubmitting}
-                className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-lg hover:shadow-xl disabled:shadow-none flex items-center justify-center min-w-[140px] flex-1 sm:flex-none"
+                className="px-2 py-2 md:px-6 md:py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 shadow-lg hover:shadow-xl disabled:shadow-none flex items-center justify-center min-w-[140px] flex-1 sm:flex-none"
               >
                 {isSubmitting ? (
                   <>
@@ -357,10 +357,7 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
                     প্রসেসিং...
                   </>
                 ) : (
-                  <>
-                    <FaCheckCircle className="mr-2" />
-                    অর্ডার কনফার্ম করুন
-                  </>
+                  <> কনফার্ম করুন</>
                 )}
               </button>
             </div>

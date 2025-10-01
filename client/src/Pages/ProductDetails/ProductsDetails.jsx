@@ -23,6 +23,10 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(
@@ -54,20 +58,6 @@ const ProductDetails = () => {
     getProducts();
   }, []);
 
-  // Function to render star ratings
-  const renderStars = rating => {
-    const stars = [];
-    const fullStars = Math.floor(rating || 0);
-    for (let i = 1; i <= 5; i++) {
-      if (i <= fullStars) {
-        stars.push(<FaStar key={i} className="text-amber-500" />);
-      } else {
-        stars.push(<FaRegStar key={i} className="text-amber-500" />);
-      }
-    }
-    return stars;
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -87,7 +77,6 @@ const ProductDetails = () => {
   // Extract product details
   const {
     name = 'Product Name',
-    category = 'Uncategorized',
     price = 0,
     discountPrice = 0,
     stock = 'Out of Stock',
@@ -96,8 +85,6 @@ const ProductDetails = () => {
     sku = 'N/A',
     specifications = [],
     images = ['https://via.placeholder.com/500x500?text=No+Image'],
-    rating = 0,
-    reviews = 0,
   } = product;
 
   // Discount %
@@ -110,7 +97,7 @@ const ProductDetails = () => {
     <div className="sm:max-w-7xl mx-auto py-8">
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 mb-6 ml-2 md:ml-0 ">
-        Home / {category} / {brand} / {name.substring(0, 20)}...
+        <Link to={'/'}>Home</Link> / {brand} / {name.substring(0, 20)}...
       </div>
 
       {/* Product Section */}
@@ -149,12 +136,6 @@ const ProductDetails = () => {
         <div className="px-4 md:px-0">
           <h1 className="text-2xl font-bold text-gray-800 mb-4 ">{name}</h1>
 
-          {/* Rating */}
-          <div className="flex items-center mb-4">
-            <div className="flex mr-2">{renderStars(rating)}</div>
-            <span className="text-sm text-gray-600">({reviews} Reviews)</span>
-          </div>
-
           {/* Description */}
           <div className="mb-6">
             <h3 className="font-semibold text-lg mb-2">Description:</h3>
@@ -165,16 +146,6 @@ const ProductDetails = () => {
           <div className="bg-gray-100 rounded-lg p-4 mb-6 overflow-x-auto">
             <table className="w-full text-sm">
               <tbody>
-                <tr>
-                  <td className="py-1 text-gray-600 font-medium">Stock:</td>
-                  <td
-                    className={`py-1 font-semibold  ${
-                      stock > 0 ? 'text-green-600' : 'text-red-600'
-                    }`}
-                  >
-                    {stock > 0 ? 'In Stock' : 'Out of Stock'}
-                  </td>
-                </tr>
                 <tr>
                   <td className="py-1 text-gray-600 font-medium">SKU:</td>
                   <td className="py-1">{sku}</td>
@@ -301,7 +272,7 @@ const ProductDetails = () => {
                 ৳{product.price}
               </p>
               <Link to={`/products-details/${product?._id}`}>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
+                <button className="w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
                   {' '}
                   Details
                 </button>

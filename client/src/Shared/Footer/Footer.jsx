@@ -14,38 +14,10 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-[#831010] to-[#B91C1C] text-white">
-      {/* Trust Badges Section */}
-      <div className="bg-red-800 bg-opacity-50 py-6">
-        <div className="sm:max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex flex-col items-center text-center">
-              <FaShippingFast className="w-8 h-8 text-white mb-2" />
-              <span className="font-semibold text-sm">Free Shipping</span>
-              <span className="text-red-200 text-xs">On orders over $50</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <FaShieldAlt className="w-8 h-8 text-white mb-2" />
-              <span className="font-semibold text-sm">2-Year Warranty</span>
-              <span className="text-red-200 text-xs">Quality Guaranteed</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <FaHeadset className="w-8 h-8 text-white mb-2" />
-              <span className="font-semibold text-sm">24/7 Support</span>
-              <span className="text-red-200 text-xs">Expert Assistance</span>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <FaCreditCard className="w-8 h-8 text-white mb-2" />
-              <span className="font-semibold text-sm">Secure Payment</span>
-              <span className="text-red-200 text-xs">Safe & Encrypted</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Content */}
       <div className="pt-12 pb-8">
         <div className="sm:max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-2">
             {/* Company Info */}
             <div className="flex flex-col">
               <div className="flex items-center space-x-2 text-white mb-4">
@@ -60,7 +32,7 @@ const Footer = () => {
                   <span className="text-xs text-red-200">BEATS PREMIUM</span>
                 </div>
               </div>
-              <p className="text-red-200 mb-6 leading-relaxed">
+              <p className="text-red-200 mb-6 leading-relaxed hidden sm:block">
                 Your trusted partner for premium eyewear and accessories.
                 Quality products at competitive prices with exceptional customer
                 service.
@@ -87,7 +59,7 @@ const Footer = () => {
             </div>
 
             {/* Categories */}
-            <div>
+            <div className="hidden lg:block">
               <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-red-600">
                 Categories
               </h3>
@@ -139,25 +111,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Payment Methods */}
-          <div className="border-t border-red-600 pt-6 mb-6">
-            <div className="flex flex-col items-center">
-              <span className="text-red-200 text-sm mb-3">We Accept</span>
-              <div className="flex space-x-4">
-                {['bKash', 'Nagad'].map(method => (
-                  <div
-                    key={method}
-                    className="bg-opacity-20 px-3 py-1 rounded-md"
-                  >
-                    <span className="text-white text-sm font-medium">
-                      {method}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Bottom Bar */}
           <div className="border-t border-red-600 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center">
@@ -165,7 +118,7 @@ const Footer = () => {
                 © {new Date().getFullYear()} Chashma Express BD. All rights
                 reserved.
               </p>
-              <div className="flex flex-wrap justify-center space-x-6">
+              <div className="flex flex-wrap justify-center space-x-6 hidden md:flex">
                 {[
                   'Privacy Policy',
                   'Terms of Service',

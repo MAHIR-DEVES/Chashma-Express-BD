@@ -99,7 +99,7 @@ const ProductCards = ({ product }) => {
             <div className="flex items-baseline ">
               {discountPrice ? (
                 <>
-                  <span className="text-2xl font-bold text-gray-900">
+                  <span className="text-xl md:text-2xl font-bold text-gray-900">
                     ৳{discountPrice}
                   </span>
                   <span className="text-lg text-gray-500 line-through ml-2">
@@ -107,16 +107,15 @@ const ProductCards = ({ product }) => {
                   </span>
                 </>
               ) : (
-                <span className="text-2xl font-bold text-gray-900">
+                <span className="text-xl md:text-2xl font-bold text-gray-900">
                   ৳{price}
                 </span>
               )}
             </div>
-            <div className="mb-2">ক্যাশ অন ডেলিভারি</div>
 
             {/* Action Buttons */}
-            <div className="flex space-x-2">
-              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
+            <div className="flex space-x-2 mt-2">
+              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white px-2 py-0.5  md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
                 Order Now
               </button>
             </div>

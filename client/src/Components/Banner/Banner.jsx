@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import Image2 from '../../assets/glass-2.png';
 import Image5 from '../../assets/glass-5.png';
+import { FiPhoneCall } from 'react-icons/fi';
 
 const Banner = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -21,13 +22,14 @@ const Banner = () => {
       id: 2,
       background: 'bg-gradient-to-r from-amber-900 to-red-900',
       image: Image2,
-      title: 'Double Poly Polarized Sunglasses',
+      title: 'Double Poly Sunglasses Trendy designs & premium ',
       subtitle: 'Maximum Eye Protection',
       description:
-        'Stylish and durable sunglasses with polarized double poly lenses, ensuring full UV400 protection and long-lasting comfort.',
+        'quality 100% UV Protection Lightweight & Comfortable Perfect for Daily Use & Outdoor Fun',
       price: 'Save up to 40% today!',
       badge: 'Hot Deal',
-      buttonText: 'Explore',
+      buttonText: 'Order Now',
+
       buttonColor: 'bg-red-600 hover:bg-red-700',
     },
     {
@@ -63,7 +65,7 @@ const Banner = () => {
         {slides.map(slide => (
           <SwiperSlide key={slide.id}>
             <div
-              className={`relative ${slide.background} h-[300px] sm:h-[450px] md:h-[500px] flex items-center`}
+              className={`relative ${slide.background} h-[230px] sm:h-[450px] md:h-[500px] flex items-center`}
             >
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-10">
@@ -95,9 +97,13 @@ const Banner = () => {
                       {slide.subtitle}
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3 hidden md:block">
                       {slide.description}
                     </p>
+                    <button className="bg-red-500 hover:bg-red-600 py-0.5 md:py-3 px-2 md:px-6 rounded-md md:font-medium flex items-center gap-2">
+                      <FiPhoneCall className="text-lg" />
+                      {slide.buttonText} {slide.call}
+                    </button>
                   </div>
 
                   {/* Image - Right Side */}
