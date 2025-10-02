@@ -25,15 +25,16 @@ async function run() {
     // await client.connect();
     console.log('✅ MongoDB connected successfully');
 
-    const db = client.db('Tech_bazar');
+    const db = client.db('ChashmaExpressBD');
     const productCollection = db.collection('products');
     const ordersCollection = db.collection('orders');
+    const usersCollection = db.collection('users');
 
     // -------------------- Routes --------------------
 
     // Test route
     app.get('/', (req, res) => {
-      res.send('🚀 Server is running fine!');
+      res.send('🚀 Chashma Express BD Server is running fine!');
     });
 
     // Save a product
@@ -150,19 +151,51 @@ async function run() {
       }
     });
 
-    // Admin login
-    app.post('/admin-login', (req, res) => {
-      const { email, password } = req.body;
+    // Admin login (from DB)
+    app.post('/admin-login', async (req, res) => {
+      try {
+        const { email, password } = req.body;
 
-      if (
-        email === process.env.ADMIN_EMAIL &&
-        password === process.env.ADMIN_PASSWORD
-      ) {
-        res.json({ success: true, message: 'Admin login successful' });
-      } else {
-        res
-          .status(401)
-          .json({ success: false, message: 'Invalid credentials' });
+        // 1. User খুঁজুন
+        const user = await usersCollection.findOne({ email });
+
+        if (!user) {
+          return res
+            .status(401)
+            .json({ success: false, message: 'User not found' });
+        }
+
+        // 2. Password match check করুন (এখন simple match, পরে bcrypt করব)
+        if (user.password !== password) {
+          return res
+            .status(401)
+            .json({ success: false, message: 'Invalid password' });
+        }
+
+        // 3. Role check করুন
+        if (user.role !== 'admin') {
+          return res
+            .status(403)
+            .json({ success: false, message: 'Not authorized' });
+        }
+
+        // 4. Success হলে response পাঠান
+        res.json({
+          success: true,
+          message: 'Admin login successful',
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          },
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          message: 'Server error',
+          error: error.message,
+        });
       }
     });
 

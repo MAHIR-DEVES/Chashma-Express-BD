@@ -140,40 +140,44 @@ const Banner = () => {
       </Swiper>
 
       {/* Trust Badges */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-4 sm:mt-6">
-        {[
-          {
-            icon: '📞',
-            text: 'Order Now',
-            subtext: '01302-596174',
-          },
-          {
-            icon: '🚚',
-            text: 'Home Delivery',
-            subtext: 'All Over Bangladesh',
-          },
-          {
-            icon: '💳',
-            text: 'Cash on Delivery',
-            subtext: '100% Trusted Site',
-          },
-          {
-            icon: '👓',
-            text: 'Genuine Products',
-            subtext: '100% Authentic',
-          },
-        ].map((badge, index) => (
-          <div
-            key={index}
-            className="bg-white p-3 sm:p-4 rounded-lg shadow-md text-center border border-gray-100 hover:shadow-lg transition-shadow duration-300"
-          >
-            <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{badge.icon}</div>
-            <div className="font-semibold text-gray-800 text-xs sm:text-sm">
-              {badge.text}
+      <div className="hidden md:block">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-4 sm:mt-6 ">
+          {[
+            {
+              icon: '📞',
+              text: 'Order Now',
+              subtext: '01302-596174',
+            },
+            {
+              icon: '🚚',
+              text: 'Home Delivery',
+              subtext: 'All Over Bangladesh',
+            },
+            {
+              icon: '💳',
+              text: 'Cash on Delivery',
+              subtext: '100% Trusted Site',
+            },
+            {
+              icon: '👓',
+              text: 'Genuine Products',
+              subtext: '100% Authentic',
+            },
+          ].map((badge, index) => (
+            <div
+              key={index}
+              className="bg-white p-3 sm:p-4 rounded-lg shadow-md text-center border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="text-xl sm:text-2xl mb-1 sm:mb-2">
+                {badge.icon}
+              </div>
+              <div className="font-semibold text-gray-800 text-xs sm:text-sm">
+                {badge.text}
+              </div>
+              <div className="text-gray-500 text-xs">{badge.subtext}</div>
             </div>
-            <div className="text-gray-500 text-xs">{badge.subtext}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

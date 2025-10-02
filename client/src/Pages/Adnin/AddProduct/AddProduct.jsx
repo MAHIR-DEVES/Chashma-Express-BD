@@ -26,6 +26,7 @@ const AddProduct = () => {
     'Frame Collection',
     'Double Poly Sunglasses',
     'Polarized Sunglasses',
+    'Ray-Ban Sunglass',
   ];
 
   const brands = [

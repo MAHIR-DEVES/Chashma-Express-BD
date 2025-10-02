@@ -36,15 +36,12 @@ const AllProducts = () => {
   }, []);
 
   const categories = [
-    'all',
-    'Laptops',
-    'Smartphones',
-    'TVs',
-    'Audio',
-    'Accessories',
-    'Monitors',
-    'Wearables',
-    'Gaming',
+    'Sunglasses',
+    'Power Glasses',
+    'Frame Collection',
+    'Double Poly Sunglasses',
+    'Polarized Sunglasses',
+    'Ray-Ban Sunglass',
   ];
   const statuses = ['all', 'active', 'out-of-stock', 'low-stock'];
 
@@ -215,7 +212,7 @@ const AllProducts = () => {
           </div>
 
           {/* Status */}
-          <div className="w-full lg:w-auto">
+          <div className="w-full lg:w-auto hidden">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Status
             </label>

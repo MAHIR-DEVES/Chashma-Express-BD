@@ -13,6 +13,7 @@ import NavMarquee from './NavMarquee';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -21,13 +22,15 @@ const Navbar = () => {
     if (searchQuery.trim()) {
       navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
       setSearchQuery('');
+      setIsMobileSearchOpen(false); // Mobile search close after submit
     }
   };
 
   return (
-    <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg  py-2">
+    <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg py-2">
       <div className="w-full px-2 sm:max-w-7xl mx-auto">
-        <NavMarquee></NavMarquee>
+        <NavMarquee />
+
         {/* Main navbar content */}
         <div className="flex justify-between items-center py-5 md:py-3">
           {/* Mobile menu button */}
@@ -45,12 +48,9 @@ const Navbar = () => {
 
           {/* Logo and brand name */}
           <Link to="/" className="flex items-center space-x-3 text-white">
-            {/* Logo with Emoji */}
-            <div className="-mr-4 -mt-10  hidden md:block">
-              <img className="w-14 h-8 " src={ICON} alt="" />
+            <div className="-mr-4 -mt-10 hidden md:block">
+              <img className="w-14 h-8" src={ICON} alt="Logo" />
             </div>
-
-            {/* Brand Name */}
             <div className="flex flex-col leading-tight">
               <span className="font-bold text-2xl md:text-lg">
                 Chashma Express BD
@@ -84,7 +84,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             {/* Search icon - Mobile */}
             <button
-              onClick={() => document.getElementById('mobile-search').focus()}
+              onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
               className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 md:hidden"
               aria-label="Search"
             >
@@ -94,7 +94,7 @@ const Navbar = () => {
             {/* User account icon */}
             <Link
               to="#"
-              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200  hidden md:block"
+              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 hidden md:block"
               aria-label="User account"
             >
               <FaRegUser className="w-5 h-5" />
@@ -103,7 +103,7 @@ const Navbar = () => {
             {/* Shopping cart icon */}
             <Link
               to="#"
-              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 relative  hidden md:block"
+              className="text-white p-2 rounded-full hover:bg-red-700 transition duration-200 relative hidden md:block"
               aria-label="Shopping cart"
             >
               <FaShoppingCart className="w-5 h-5" />
@@ -115,24 +115,26 @@ const Navbar = () => {
         </div>
 
         {/* Search bar - Mobile */}
-        <div className="py-3 border-t border-red-700 md:hidden">
-          <form onSubmit={handleSearch} className="flex">
-            <input
-              id="mobile-search"
-              type="text"
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search products..."
-              className="flex-grow px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400 bg-red-900 bg-opacity-50 text-white placeholder-red-200"
-            />
-            <button
-              type="submit"
-              className="bg-white text-red-700 px-4 py-2 rounded-r-md hover:bg-red-50 transition duration-200 font-medium"
-            >
-              <FaSearch className="w-5 h-5" />
-            </button>
-          </form>
-        </div>
+        {isMobileSearchOpen && (
+          <div className="py-3 border-t border-red-700 md:hidden">
+            <form onSubmit={handleSearch} className="flex">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search products..."
+                className="flex-grow px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-400 bg-red-900 bg-opacity-50 text-white placeholder-red-200"
+                autoFocus
+              />
+              <button
+                type="submit"
+                className="bg-white text-red-700 px-4 py-2 rounded-r-md hover:bg-red-50 transition duration-200 font-medium"
+              >
+                <FaSearch className="w-5 h-5" />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </nav>
   );
