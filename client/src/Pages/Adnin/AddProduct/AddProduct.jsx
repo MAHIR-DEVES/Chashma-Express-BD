@@ -27,6 +27,13 @@ const AddProduct = () => {
     'Double Poly Sunglasses',
     'Polarized Sunglasses',
     'Ray-Ban Sunglass',
+    'Corina Metal ',
+    'Carbon Fiber',
+    'TR90',
+    'Lance Clear ',
+    'Contact Lenses',
+    'Fiver Frames',
+    'Regular ',
   ];
 
   const brands = [
@@ -35,6 +42,15 @@ const AddProduct = () => {
     'Frame',
     'Tom Fot ',
     'New Collection',
+    'Dior',
+    'Gucci',
+    'Denmark',
+    'Mont Blanc',
+    'TR90',
+    'Nike',
+    'Polarized ',
+    'Ray-Ban',
+    'Porche',
   ];
 
   const handleInputChange = e => {

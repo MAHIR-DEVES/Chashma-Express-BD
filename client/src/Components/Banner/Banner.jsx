@@ -60,7 +60,7 @@ const Banner = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         speed={1000}
-        className="rounded-b-lg sm:rounded-b-xl lg:rounded-b-2xl overflow-hidden shadow-xl"
+        className=" overflow-hidden shadow-xl"
       >
         {slides.map(slide => (
           <SwiperSlide key={slide.id}>

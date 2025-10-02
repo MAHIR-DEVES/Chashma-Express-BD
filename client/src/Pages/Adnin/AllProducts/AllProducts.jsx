@@ -34,6 +34,13 @@ const AllProducts = () => {
     'Double Poly Sunglasses',
     'Polarized Sunglasses',
     'Ray-Ban Sunglass',
+    'Corina Metal ',
+    'Carbon Fiber',
+    'TR90',
+    'Lance Clear ',
+    'Contact Lenses',
+    'Fiver Frames',
+    'Regular ',
   ];
 
   // 🟢 Filter and sort products
