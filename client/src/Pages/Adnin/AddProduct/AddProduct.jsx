@@ -160,10 +160,10 @@ const AddProduct = () => {
     }
   };
 
-  const generateSKU = () => {
-    const sku = `SKU- ${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-    setProductData(prev => ({ ...prev, sku }));
-  };
+  // const generateSKU = () => {
+  //   const sku = `SKU- ${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+  //   setProductData(prev => ({ ...prev, sku }));
+  // };
 
   return (
     <div className=" pt-4">
@@ -275,7 +275,7 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              <div>
+              {/* <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="block text-sm font-medium text-gray-700">
                     SKU
@@ -296,7 +296,7 @@ const AddProduct = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Product SKU"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  FaStar,
-  FaRegStar,
-  FaShoppingCart,
-  FaHeart,
-  FaShare,
-} from 'react-icons/fa';
+import { FaShoppingCart, FaHeart, FaShare } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import axios from 'axios';
 import BuyNowModal from '../../Components/Modal/BuyNowModal';
@@ -19,7 +13,6 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  console.log(products);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,20 +59,10 @@ const ProductDetails = () => {
     );
   }
 
-  // if (!product) {
-  //   return (
-  //     <div className="flex justify-center items-center h-64">
-  //       <p className="text-center text-lg text-red-500">Product not found</p>
-  //     </div>
-  //   );
-  // }
-
-  // Extract product details
   const {
     name = 'Product Name',
     price = 0,
     discountPrice = 0,
-    stock = 'Out of Stock',
     description = 'No description available',
     brand = 'Unknown Brand',
     sku = 'N/A',
@@ -87,7 +70,6 @@ const ProductDetails = () => {
     images = ['https://via.placeholder.com/500x500?text=No+Image'],
   } = product;
 
-  // Discount %
   const discountPercent =
     discountPrice && price > 0
       ? Math.round(((price - discountPrice) / price) * 100)
@@ -147,8 +129,6 @@ const ProductDetails = () => {
             <table className="w-full text-sm">
               <tbody>
                 <tr>
-                  <td className="py-1 text-gray-600 font-medium">SKU:</td>
-                  <td className="py-1">{sku}</td>
                   <td className="py-1 text-gray-600 font-medium">Brand:</td>
                   <td className="py-1">{brand}</td>
                 </tr>
@@ -173,7 +153,7 @@ const ProductDetails = () => {
             {discountPrice > 0 && discountPrice < price ? (
               <div className="flex items-baseline mb-2 flex-wrap gap-2">
                 <span className="text-3xl font-bold text-gray-900">
-                  ${discountPrice.toLocaleString()}
+                  ৳{discountPrice.toLocaleString()}
                 </span>
                 <span className="text-lg text-gray-500 line-through">
                   ৳{price.toLocaleString()}
@@ -214,10 +194,9 @@ const ProductDetails = () => {
             <button
               onClick={() => setIsModalOpen(true)}
               className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-md font-medium transition-colors flex items-center justify-center disabled:bg-gray-400 disabled:cursor-not-allowed"
-              disabled={stock <= 0}
             >
               <FaShoppingCart className="mr-2" />
-              {stock > 0 ? 'অর্ডার করুন' : 'Out of Stock'}
+              অর্ডার করুন
             </button>
             <button
               onClick={() => navigate(-1)}
@@ -255,28 +234,30 @@ const ProductDetails = () => {
           {products?.slice(0, 4).map(product => (
             <div
               key={product.id}
-              className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
             >
+              {/* Image Full Width */}
               <img
                 src={product.images[0]}
                 alt={product?.name}
-                className="w-full h-40 object-contain mb-3"
+                className="w-full object-cover"
               />
-              <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
-              {product.description && (
-                <p className="text-xs text-gray-600 mb-2">
-                  {product.description}
+              <div className="p-4">
+                <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
+                {product.description && (
+                  <p className="text-xs text-gray-600 mb-2">
+                    {product.description}
+                  </p>
+                )}
+                <p className="text-lg font-bold text-gray-900">
+                  ৳{product.discountPrice}
                 </p>
-              )}
-              <p className="text-lg font-bold text-gray-900">
-                ৳{product.price}
-              </p>
-              <Link to={`/products-details/${product?._id}`}>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
-                  {' '}
-                  Details
-                </button>
-              </Link>
+                <Link to={`/products-details/${product?._id}`}>
+                  <button className="w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
+                    Details
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>

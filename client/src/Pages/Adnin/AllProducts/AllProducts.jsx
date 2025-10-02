@@ -1,20 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import {
-  FaSearch,
-  // FaEdit,
-  FaTrash,
-  FaEye,
-  FaPlus,
-  FaBox,
-} from 'react-icons/fa';
+import { FaSearch, FaTrash, FaEye, FaPlus, FaBox } from 'react-icons/fa';
 import ProductModal from '../../../Components/Modal/ViewModel';
 
 const AllProducts = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
-  const [filterStatus, setFilterStatus] = useState('all');
   const [sortBy, setSortBy] = useState('name');
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -43,7 +35,6 @@ const AllProducts = () => {
     'Polarized Sunglasses',
     'Ray-Ban Sunglass',
   ];
-  const statuses = ['all', 'active', 'out-of-stock', 'low-stock'];
 
   // 🟢 Filter and sort products
   const filteredProducts = products
@@ -57,21 +48,11 @@ const AllProducts = () => {
       const matchesCategory =
         filterCategory === 'all' || product.category === filterCategory;
 
-      // 🟢 calculate status based on stock
-      let status = 'active';
-      const stock = Number(product.stock) || 0;
-      if (stock === 0) status = 'out-of-stock';
-      else if (stock < 5) status = 'low-stock';
-
-      const matchesStatus = filterStatus === 'all' || status === filterStatus;
-
-      return matchesSearch && matchesCategory && matchesStatus;
+      return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
       const priceA = Number(a.price) || 0;
       const priceB = Number(b.price) || 0;
-      const stockA = Number(a.stock) || 0;
-      const stockB = Number(b.stock) || 0;
       const salesA = Number(a.sales) || 0;
       const salesB = Number(b.sales) || 0;
 
@@ -82,39 +63,11 @@ const AllProducts = () => {
           return priceA - priceB;
         case 'sales':
           return salesB - salesA;
-        case 'stock':
-          return stockB - stockA;
         case 'name':
         default:
           return a.name.localeCompare(b.name);
       }
     });
-
-  const getStatusBadge = stockValue => {
-    const stock = Number(stockValue) || 0;
-    let status = 'active';
-    if (stock === 0) status = 'out-of-stock';
-    else if (stock < 5) status = 'low-stock';
-
-    const statusConfig = {
-      active: { color: 'bg-green-100 text-green-800', text: 'In Stock' },
-      'out-of-stock': {
-        color: 'bg-red-100 text-red-800',
-        text: 'Out of Stock',
-      },
-      'low-stock': {
-        color: 'bg-yellow-100 text-yellow-800',
-        text: 'Low Stock',
-      },
-    };
-
-    const { color, text } = statusConfig[status];
-    return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium ${color}`}>
-        {text}
-      </span>
-    );
-  };
 
   const handleDelete = async id => {
     Swal.fire({
@@ -128,15 +81,12 @@ const AllProducts = () => {
     }).then(async result => {
       if (result.isConfirmed) {
         try {
-          // API request
           const res = await axios.delete(
             `https://tech-bazar-iota.vercel.app/products/${id}`
           );
 
           if (res.data.deletedCount > 0) {
             Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
-
-            // state থেকে remove করে UI আপডেট করো
             setProducts(prevProducts =>
               prevProducts.filter(product => product._id !== id)
             );
@@ -148,6 +98,7 @@ const AllProducts = () => {
       }
     });
   };
+
   const handleView = product => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -157,6 +108,7 @@ const AllProducts = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
+
   return (
     <div className="p-4">
       {/* Header */}
@@ -203,33 +155,10 @@ const AllProducts = () => {
               value={filterCategory}
               onChange={e => setFilterCategory(e.target.value)}
             >
+              <option value="all">All Categories</option>
               {categories.map(category => (
                 <option key={category} value={category}>
-                  {category === 'all' ? 'All Categories' : category}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Status */}
-          <div className="w-full lg:w-auto hidden">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Status
-            </label>
-            <select
-              className="w-full lg:w-40 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={filterStatus}
-              onChange={e => setFilterStatus(e.target.value)}
-            >
-              {statuses.map(status => (
-                <option key={status} value={status}>
-                  {status === 'all'
-                    ? 'All Status'
-                    : status === 'active'
-                    ? 'In Stock'
-                    : status === 'out-of-stock'
-                    ? 'Out of Stock'
-                    : 'Low Stock'}
+                  {category}
                 </option>
               ))}
             </select>
@@ -249,7 +178,6 @@ const AllProducts = () => {
               <option value="price-high">Price: High to Low</option>
               <option value="price-low">Price: Low to High</option>
               <option value="sales">Sales</option>
-              <option value="stock">Stock</option>
             </select>
           </div>
         </div>
@@ -269,13 +197,6 @@ const AllProducts = () => {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Price
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Stock
-                </th>
-
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -310,18 +231,11 @@ const AllProducts = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     ₹{Number(product.price).toLocaleString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {product.stock}
-                  </td>
-
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(product.stock)}
-                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-2">
                       <button
                         className="text-blue-600 hover:text-blue-900"
-                        onClick={() => handleView(product)} // ✅ open modal
+                        onClick={() => handleView(product)}
                       >
                         <FaEye className="w-4 h-4" />
                       </button>

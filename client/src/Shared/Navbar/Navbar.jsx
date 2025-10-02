@@ -27,7 +27,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg py-2">
+    <nav className="bg-gradient-to-r from-[#831010] to-[#B91C1C] shadow-lg py-2 md:top-0 md:z-50 md:sticky">
       <div className="w-full px-2 sm:max-w-7xl mx-auto">
         <NavMarquee />
 

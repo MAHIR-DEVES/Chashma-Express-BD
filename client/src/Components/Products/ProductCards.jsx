@@ -81,12 +81,12 @@ const ProductCards = ({ product }) => {
         {/* Product Details */}
         <div className="p-4 flex-grow flex flex-col">
           {brand && (
-            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
+            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1 ">
               {brand}
             </p>
           )}
 
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-amber-600 transition-colors">
+          <h3 className="text-md md:text-lg font-semibold text-gray-800  line-clamp-2 hover:text-amber-600 transition-colors">
             {name}
           </h3>
 
@@ -97,7 +97,7 @@ const ProductCards = ({ product }) => {
                   <span className="text-xl md:text-2xl font-bold text-gray-900">
                     ৳{discountPrice}
                   </span>
-                  <span className="text-lg text-gray-500 line-through ml-2">
+                  <span className="text-md md:text-lg text-gray-500 line-through ml-2">
                     ৳{price}
                   </span>
                 </>
@@ -109,7 +109,7 @@ const ProductCards = ({ product }) => {
             </div>
 
             <div className="flex space-x-2 mt-2">
-              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white px-2 py-2 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
+              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white  py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
                 Order Now
               </button>
             </div>
