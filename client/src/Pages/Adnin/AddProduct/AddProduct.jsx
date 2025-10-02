@@ -184,7 +184,7 @@ const AddProduct = () => {
   return (
     <div className=" pt-4">
       {/* Header */}
-      <div className="mb-6 pl-2 md:pl-0">
+      <div className="mb-6 ml-3 md:pl-0">
         <h1 className="text-2xl font-bold text-gray-800">Add New Product</h1>
         <p className="text-gray-600">Add a new product to your inventory</p>
       </div>
