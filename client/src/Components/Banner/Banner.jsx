@@ -101,7 +101,6 @@ const Banner = () => {
                       {slide.description}
                     </p>
                     <button className="bg-red-500 hover:bg-red-600 py-0.5 md:py-3 px-2 md:px-6 rounded-md md:font-medium flex items-center gap-2">
-                      <FiPhoneCall className="text-lg" />
                       {slide.buttonText} {slide.call}
                     </button>
                   </div>

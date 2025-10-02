@@ -281,7 +281,8 @@ const BuyNowModal = ({ isOpen, onClose, product, quantity }) => {
                 </div>
                 <textarea
                   name="address"
-                  placeholder="আপনার সম্পূর্ণ  ঠিকানা লিখুন "
+                  placeholder="আপনার সম্পূর্ণ  ঠিকানা লেখুন গ্রাম/এলাকা/থানা/ উপজেলা, /জেলা বিভাগ
+ "
                   value={userInfo.address}
                   onChange={handleChange}
                   rows="3"
