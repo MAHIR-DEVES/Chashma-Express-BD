@@ -36,7 +36,7 @@ const Banner = () => {
       id: 3,
       background: 'bg-gradient-to-r from-gray-800 to-gray-600',
       image: Image5,
-      title: 'Premium Prescription Power Glasses',
+      title: 'Premium TR Metal Frame Stylish Design Premium Quality',
       subtitle: 'Crystal-Clear Vision Everyday',
       description:
         'High-quality prescription-ready lenses with modern frames, crafted for comfort and clarity. Perfect fit for your daily lifestyle.',
