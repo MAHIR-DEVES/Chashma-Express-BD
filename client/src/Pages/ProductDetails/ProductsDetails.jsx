@@ -138,7 +138,7 @@ const ProductDetails = () => {
 
           {/* Specifications */}
           {specifications && specifications.length > 0 && (
-            <div className="mb-6">
+            <div className="mb-6 hidden md:block">
               <h3 className="font-semibold text-lg mb-2">Specifications:</h3>
               <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                 {specifications.map((spec, index) => (
@@ -232,33 +232,35 @@ const ProductDetails = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products?.slice(0, 4).map(product => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
-            >
-              {/* Image Full Width */}
-              <img
-                src={product.images[0]}
-                alt={product?.name}
-                className="w-full object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
-                {product.description && (
-                  <p className="text-xs text-gray-600 mb-2">
-                    {product.description}
+            <Link to={`/products-details/${product?._id}`}>
+              <div
+                key={product.id}
+                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
+              >
+                {/* Image Full Width */}
+                <img
+                  src={product.images[0]}
+                  alt={product?.name}
+                  className="w-full object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-sm mb-1">{product.name}</h3>
+                  {product.description && (
+                    <p className="text-xs text-gray-600 mb-2">
+                      {product.description}
+                    </p>
+                  )}
+                  <p className="text-lg font-bold text-gray-900">
+                    ৳{product.discountPrice}
                   </p>
-                )}
-                <p className="text-lg font-bold text-gray-900">
-                  ৳{product.discountPrice}
-                </p>
-                <Link to={`/products-details/${product?._id}`}>
-                  <button className="w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
-                    Details
-                  </button>
-                </Link>
+                  <Link to={`/products-details/${product?._id}`}>
+                    <button className="w-full bg-red-500 hover:bg-red-600 text-white px-2 py-1.5 md:py-3 rounded-lg flex items-center justify-center transition-colors font-medium group-hover:shadow-lg">
+                      Details
+                    </button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

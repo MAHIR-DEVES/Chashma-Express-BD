@@ -37,12 +37,12 @@ const ProductCards = ({ product }) => {
           {/* Top badges */}
           <div className="absolute top-3 left-3 flex flex-col space-y-2">
             {isNew && (
-              <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md">
+              <span className="bg-blue-500 text-white text-xs px-2   md:py-1 rounded-full font-semibold shadow-md">
                 NEW
               </span>
             )}
             {isHot && (
-              <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md flex items-center">
+              <span className="bg-red-500 text-white text-xs px-2 md:py-1 rounded-full font-semibold shadow-md flex items-center">
                 <FaFire className="mr-1" size={10} /> HOT
               </span>
             )}
@@ -50,7 +50,7 @@ const ProductCards = ({ product }) => {
 
           {/* Discount badge */}
           {discountPercent > 0 && (
-            <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
+            <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2 md:py-1 rounded-full shadow-md">
               -{discountPercent}%
             </div>
           )}
@@ -71,11 +71,11 @@ const ProductCards = ({ product }) => {
           </div>
 
           {/* Stock indicator */}
-          {stock < 10 && (
+          {/* {stock < 10 && (
             <div className="absolute bottom-3 left-3 bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full font-medium">
               Only {stock} left
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Product Details */}
